@@ -10,7 +10,9 @@
 #include <algorithm>
 using namespace std;
 
-struct Compare {
+/* the comparation between the value of the map*/
+struct Compare 
+{
 	bool operator()(const pair<string,int>& lhs, const pair<string, int>& rhs) {
 		return lhs.second < rhs.second;
 	}
@@ -44,14 +46,13 @@ int main()
 					{
 						if (line.length() >= n)
 						{
-							string str = line.substr(line.length() - n);
-							//dic.insert(str);
-							output[str] += 1;
+							string str = line.substr(line.length() - n); // read the last-n suffix
+							output[str] += 1;   // count the number of suffix
 						}
 
 					}
 					vector <pair<string, int>> get_all(output.begin(), output.end());
-					sort(get_all.begin(), get_all.end(), Compare());
+					sort(get_all.begin(), get_all.end(), Compare());//use Compare to let the number be descending oder
 					for (int i = get_all.size() - 1; i >= get_all.size() - 10; i--)
 					{
 						cout << get_all[i].first << "     " << get_all[i].second << endl;
@@ -79,13 +80,14 @@ int main()
 			{
 				if (line.length() >= word.length())
 				{
-					string str = line.substr(line.length() - word.length());
+					string str = line.substr(line.length() - word.length()); // get the last-word.length() latters
 					if (str == word)
 					{
-						outside.push(line);						
+						outside.push(line);		//  output into a stack				
 					}
 				}
 			}
+			/* output by descending order */
 			for (int i = 0; i < outside.size(); i++)
 			{
 				cout << outside.top() << endl;
